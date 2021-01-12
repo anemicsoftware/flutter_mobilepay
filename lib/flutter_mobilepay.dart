@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -12,8 +11,9 @@ class FlutterMobilepay {
     return version;
   }
 
-  static Future<bool> setup(String merchantId) async {
-    final bool version = await _channel.invokeMethod('setup', <String, dynamic>{'merchantId': merchantId});
+  static Future<bool> setup(String merchantId, String scheme) async {
+    final bool version = await _channel.invokeMethod(
+        'setup', <String, dynamic>{'merchantId': merchantId, 'scheme': scheme});
     return version;
   }
 
@@ -23,7 +23,8 @@ class FlutterMobilepay {
   }
 
   static Future<String> payment(String orderId, int price) async {
-    final String result = await _channel.invokeMethod('payment', <String, dynamic>{'orderId': orderId, 'price': price});
+    final String result = await _channel.invokeMethod(
+        'payment', <String, dynamic>{'orderId': orderId, 'price': price});
     return result;
   }
 }
